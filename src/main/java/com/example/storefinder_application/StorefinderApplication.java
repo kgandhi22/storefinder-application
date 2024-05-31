@@ -10,7 +10,7 @@ public class StorefinderApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StorefinderApplication.class, args);
 	}
-	@GetMapping("")
+	@GetMapping("/api")
 	public String testApi() {
 		return "abcde";
 	}
