@@ -54,4 +54,8 @@ public class User {
     public void setFavoriteStoreIds(Set<String> favoriteStoreIds) {
         this.favoriteStoreIds = favoriteStoreIds;
     }
+
+    public void removeFavoriteStore(String storeId) {
+        this.favoriteStoreIds.remove(storeId);
+    }
 }

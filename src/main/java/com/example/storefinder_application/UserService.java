@@ -36,4 +36,12 @@ public class UserService {
         Set<String> favoriteStoreIds = user.getFavoriteStoreIds();
         return storeRepository.findAllById(favoriteStoreIds);
     }
+
+    public void removeFavoriteStore(String userId, String storeId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
+
+        user.removeFavoriteStore(storeId);
+        userRepository.save(user);
+    }
 }

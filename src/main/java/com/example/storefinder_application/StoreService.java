@@ -11,7 +11,7 @@ public class StoreService {
     private StoreRepository storeRepository;
 
     public List<Store> searchStores(String keyword) {
-        return storeRepository.searchByKeyword(keyword);
+        return storeRepository.findByNameStartingWithIgnoreCase(keyword);
     }
 
     public Store getStoreById(String id) {
