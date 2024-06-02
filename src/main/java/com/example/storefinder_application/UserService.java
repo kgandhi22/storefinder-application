@@ -2,6 +2,7 @@ package com.example.storefinder_application;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,4 +49,29 @@ public class UserService {
         Set<String> favoriteStoreIds = user.getFavoriteStoreIds();
         return storeRepository.findAllById(favoriteStoreIds);
     }
+
+    public void removeFavoriteStore(String userId, String storeId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
+
+        user.removeFavoriteStore(storeId);
+        userRepository.save(user);
+    }
+
+//    @Transactional
+//    public void deleteFavoriteStore(String userId, String storeId) throws Exception {
+//        Optional<User> userOptional = userRepository.findById(userId);
+//        if (userOptional.isPresent()) {
+//            User user = userOptional.get();
+//            List<String> favoriteStores = user.getFavoriteStores();
+//            if (favoriteStores.remove(storeId)) {
+//                user.setFavoriteStores(favoriteStores);
+//                userRepository.save(user);
+//            } else {
+//                throw new Exception("Store not found in user's favorites");
+//            }
+//        } else {
+//            throw new Exception("User not found");
+//        }
+//    }
 }

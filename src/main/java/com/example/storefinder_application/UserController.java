@@ -61,4 +61,24 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save favorite store");
         }
     }
+
+//    @DeleteMapping("/{userId}/favorites/{storeId}")
+//    public ResponseEntity<String> deleteFavoriteStore(@PathVariable String userId, @PathVariable String storeId) {
+//        try {
+//            userService.deleteFavoriteStore(userId, storeId);
+//            return ResponseEntity.ok("Store removed from favorites successfully");
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to remove store from favorites");
+//        }
+//    }
+
+    @DeleteMapping("/{userId}/favorites/{storeId}")
+    public ResponseEntity<?> removeFavoriteStore(@PathVariable String userId, @PathVariable String storeId) {
+        try {
+            userService.removeFavoriteStore(userId, storeId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error removing favorite store: " + e.getMessage());
+        }
+    }
 }

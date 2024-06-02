@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Document(collection = "users")
@@ -14,6 +15,7 @@ public class User {
     private String email;
     private String passwordHash;
     private Set<String> favoriteStoreIds = new HashSet<>(); // Store references by ID
+    private List<String> favoriteStores;
 
     // Getters and setters
     public String getId() {
@@ -55,4 +57,17 @@ public class User {
     public void setFavoriteStoreIds(Set<String> favoriteStoreIds) {
         this.favoriteStoreIds = favoriteStoreIds;
     }
+
+    public List<String> getFavoriteStores() {
+        return favoriteStores;
+    }
+
+    public void setFavoriteStores(List<String> favoriteStores) {
+        this.favoriteStores = favoriteStores;
+    }
+
+    public void removeFavoriteStore(String storeId) {
+        this.favoriteStoreIds.remove(storeId);
+    }
+
 }
